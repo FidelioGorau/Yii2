@@ -10,7 +10,6 @@ use Yii;
  * @property integer $id
  * @property integer $school_id
  * @property string $name
- * @property string $image_url
  * @property integer $class_id
  */
 class Students extends \yii\db\ActiveRecord
@@ -35,10 +34,9 @@ class Students extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['school_id', 'name', 'image_url', 'class_id'], 'required'],
+            [['school_id', 'name', 'class_id'], 'required'],
             [['school_id', 'class_id'], 'integer'],
-            [['name'], 'string', 'max' => 30],
-            [['image_url'], 'string', 'max' => 255]
+            [['name'], 'string', 'max' => 30]
         ];
     }
 
@@ -51,7 +49,6 @@ class Students extends \yii\db\ActiveRecord
             'id' => 'ID',
             'school_id' => 'School ID',
             'name' => 'Name',
-            'image_url' => 'Image Url',
             'class_id' => 'Class ID',
         ];
     }
