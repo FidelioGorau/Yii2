@@ -30,10 +30,10 @@ class LessonsController extends Controller
      * Lists all Lessons models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($school_id)
     {
         $searchModel = new LessonsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$school_id);
 
         return $this->render('index', [
             'searchModel' => $searchModel,

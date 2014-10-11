@@ -39,9 +39,9 @@ class LessonsSearch extends Lessons
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params,$school_id)
     {
-        $query = Lessons::find();
+        $query = Lessons::find()->where(['school_id'=>$school_id]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

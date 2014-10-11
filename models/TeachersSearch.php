@@ -39,9 +39,9 @@ class TeachersSearch extends Teachers
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params,$school_id)
     {
-        $query = Teachers::find();
+        $query = Teachers::find()->where(['school_id'=>$school_id]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
