@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 <h3>Lessons list:</h3>
+<?= Html::a('Add lesson for current student', ['students/addlesson', 'id' => $model->id, 'school_id' => $model->school_id ], ['class' => 'btn btn-success']) ?>
     <?= GridView::widget([
         'dataProvider' => $lessons,
      //   'filterModel' => $searchModel,

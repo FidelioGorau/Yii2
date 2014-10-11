@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Students;
+use app\models\StudentLesson;
+use app\models\Lessons;
 use app\models\StudentsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -83,6 +85,28 @@ class StudentsController extends Controller
         }
     }
 
+    public function actionAddlesson($id,$school_id)
+    {
+        $model = new StudentLesson();
+        var_dump($model->find()->where(['student_id'=>$id])->all());
+        $lessons = new Lessons();
+        $lessonsList = $lessons->find()->where(['school_id' => $school_id])->all();
+        $lessArray = [];
+        foreach($lessonsList as $lesson){
+            $lessArray[$lesson['id']]= $lesson['name'];
+        }
+        if ($model->load(Yii::$app->request->post()) /*&& $model->save()*/) {
+           $model->student_id= $id;
+           if($model->save()){
+                return $this->redirect(['students/view', 'id' => $id]);
+           }
+        } else {
+            return $this->render('addlessons', [
+                'model' => $model,
+                'lessArray' => $lessArray,
+            ]);
+        }
+    }
     /**
      * Updates an existing Students model.
      * If update is successful, the browser will be redirected to the 'view' page.
