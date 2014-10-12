@@ -72,10 +72,10 @@ class StudentsController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($school_id)
     {
         $model = new Students();
-
+        $model->school_id = $school_id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -95,7 +95,7 @@ class StudentsController extends Controller
         foreach($lessonsList as $lesson){
             $lessArray[$lesson['id']]= $lesson['name'];
         }
-        if ($model->load(Yii::$app->request->post()) /*&& $model->save()*/) {
+        if ($model->load(Yii::$app->request->post())) {
            $model->student_id= $id;
            if($model->save()){
                 return $this->redirect(['students/view', 'id' => $id]);

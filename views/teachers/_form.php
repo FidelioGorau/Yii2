@@ -14,8 +14,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => 30]) ?>
 
-    <?= $form->field($model, 'school_id')->textInput() ?>
-
     <?= $form->field($model, 'lesson_id')->textInput() ?>
 
     <div class="form-group">

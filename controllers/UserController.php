@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\User;
 use yii\data\ActiveDataProvider;
+use yii\web\UploadedFile;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -61,8 +62,12 @@ class UserController extends Controller
     public function actionCreate()
     {
         $model = new User();
-
+       // echo 'uploads/' . $model->userAvatar->baseName . '.' . $model->userAvatar->extension;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->userAvatar = UploadedFile::getInstance($model, 'userAvatar');
+            if ($model->validate()) {
+                $model->userAvatar->saveAs('uploads/' . $model->userAvatar->baseName . '.' . $model->userAvatar->extension);
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
