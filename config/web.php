@@ -40,6 +40,11 @@ $config = [
         'db' => require(__DIR__ . '/db.php'),
     ],
     'params' => $params,
+    'modules' => [
+        'rest' => [
+            'class' => 'app\modules\rest\Rest',
+        ],
+    ],
 ];
 
 if (YII_ENV_DEV) {
