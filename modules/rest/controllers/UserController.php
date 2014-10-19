@@ -7,14 +7,11 @@ use yii\filters\auth\HttpBearerAuth;
 
 class UserController extends ActiveController
 {
-
-    public function behaviors()
+    public function actions()
     {
-        $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = [
-            'class' => HttpBearerAuth::className()
-        ];
-        return $behaviors;
+        $actions = parent::actions();
+        unset($actions['index'], $actions['view'], $actions['update'], $actions['delete']);
+        return $actions;
     }
     public $modelClass = 'app\models\User';
 }
