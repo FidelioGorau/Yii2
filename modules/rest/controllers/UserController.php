@@ -3,9 +3,11 @@
 namespace app\modules\rest\controllers;
 
 use yii\rest\ActiveController;
+use yii\filters\auth\HttpBearerAuth;
 
-class StudentController extends ActiveController
+class UserController extends ActiveController
 {
+
     public function behaviors()
     {
         $behaviors = parent::behaviors();
@@ -14,5 +16,5 @@ class StudentController extends ActiveController
         ];
         return $behaviors;
     }
-    public $modelClass = 'app\models\Students';
+    public $modelClass = 'app\models\User';
 }
