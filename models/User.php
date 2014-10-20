@@ -20,6 +20,7 @@ use yii\web\IdentityInterface;
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
+    public $file;
     /**
      * @inheritdoc
      */
@@ -37,7 +38,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             [['username', 'password', 'authKey', 'accessToken', 'userAvatar'], 'required'],
             [['username', 'password'], 'string', 'max' => 30],
             [['authKey', 'accessToken'], 'string', 'max' => 255],
-            [['userAvatar'], 'file',]
+            [['userAvatar'], 'string',],
+            [['file'], 'file'],
         ];
     }
 

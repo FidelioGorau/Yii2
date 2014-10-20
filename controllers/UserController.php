@@ -5,10 +5,11 @@ namespace app\controllers;
 use Yii;
 use app\models\User;
 use yii\data\ActiveDataProvider;
-use yii\web\UploadedFile;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\UploadForm;
+use yii\web\UploadedFile;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -62,12 +63,24 @@ class UserController extends Controller
     public function actionCreate()
     {
         $model = new User();
-       // echo 'uploads/' . $model->userAvatar->baseName . '.' . $model->userAvatar->extension;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model->userAvatar = UploadedFile::getInstance($model, 'userAvatar');
+
+        /**/
+        if (Yii::$app->request->isPost) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+
             if ($model->validate()) {
-                $model->userAvatar->saveAs('uploads/' . $model->userAvatar->baseName . '.' . $model->userAvatar->extension);
+                $model->file->saveAs('uploads/' . $model->file->baseName . '.' . $model->file->extension);
             }
+        }
+        /**/
+
+        if ($model->load(Yii::$app->request->post())) {
+                $model->file = UploadedFile::getInstance($model, 'file');
+                $model->userAvatar = 'uploads/'. $model->file->baseName . '.' . $model->file->extension;
+                if ($model->validate()) {
+                    $model->file->saveAs('uploads/' . $model->file->baseName . '.' . $model->file->extension);
+                }
+                $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
