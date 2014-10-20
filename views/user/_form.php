@@ -20,8 +20,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'accessToken')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'userAvatar')->textInput() ?>
-
     <?= $form->field($model, 'file')->fileInput() ?>
 
     <div class="form-group">
